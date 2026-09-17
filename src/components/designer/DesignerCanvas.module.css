@@ -1,0 +1,15 @@
+.canvasWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: auto;
+  padding: var(--space-4);
+  min-height: 300px;
+}
+
+.canvasShadow {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 1px 4px rgba(0,0,0,0.08);
+  border-radius: 2px;
+  background: white;
+  flex-shrink: 0;
+}

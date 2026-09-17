@@ -1,0 +1,249 @@
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 260px;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ─── Sidebar ────────────────────────────────────────────────────── */
+.sidebar {
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--color-surface);
+}
+
+.sidebarSection {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ─── Label size select ─────────────────────────────────────────── */
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  padding-right: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+}
+
+.selectIcon {
+  position: absolute;
+  right: 10px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.labelMeta {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* ─── Tool grid buttons ─────────────────────────────────────────── */
+.toolGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.toolBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+}
+
+.toolBtn:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.toolBtn:active {
+  transform: translateY(0);
+}
+
+/* ─── Print status ──────────────────────────────────────────────── */
+.printerStatus {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.connected {
+  color: var(--color-success);
+}
+
+.disconnected {
+  color: var(--color-text-muted);
+}
+
+.errorBanner {
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.75rem;
+  color: var(--color-error);
+}
+
+/* ─── Canvas area ───────────────────────────────────────────────── */
+.canvasArea {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.canvasHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.canvasTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.canvasHint {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* ─── Properties panel ──────────────────────────────────────────── */
+.properties {
+  border-left: 1px solid var(--color-border);
+  background: var(--color-surface);
+  overflow-y: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.propertiesEmpty {
+  border-left: 1px solid var(--color-border);
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.propertiesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.propGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.propLabel {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  grid-column: 1 / -1;
+  margin-top: var(--space-1);
+}
+
+.checkRow input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: var(--radius-md);
+  background: rgba(239,68,68,0.06);
+  color: var(--color-error);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.deleteBtn:hover {
+  background: rgba(239,68,68,0.15);
+}
