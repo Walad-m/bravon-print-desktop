@@ -18,6 +18,7 @@ import {
   Cable,
   Zap,
   ExternalLink,
+  Download,
 } from 'lucide-react';
 import styles from './ConnectPrinterModal.module.css';
 
@@ -47,6 +48,7 @@ export function ConnectPrinterModal({ open, onClose }: ConnectPrinterModalProps)
     testPrint,
     feedLabel,
     clearPrinterQueue,
+    installPrinterDriver,
   } = usePrinterStore();
 
   const [clearingQueue, setClearingQueue] = useState(false);
@@ -164,9 +166,26 @@ export function ConnectPrinterModal({ open, onClose }: ConnectPrinterModalProps)
               <div className={styles.emptyState}>
                 <Printer size={32} style={{ opacity: 0.5, marginBottom: 8 }} />
                 <p>No thermal label printers detected.</p>
-                <p style={{ fontSize: '0.8rem', marginTop: 4 }}>
-                  Plug in via USB or pair your printer in Windows Bluetooth Settings.
-                </p>
+                {typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.userAgent || '') ? (
+                  <p style={{ fontSize: '0.8rem', marginTop: 6, marginBottom: 12, color: 'var(--text-muted)' }}>
+                    On macOS, make sure your printer is added in <strong>System Settings &gt; Printers &amp; Scanners</strong>. Once added, click <strong>Refresh</strong> above.
+                  </p>
+                ) : (
+                  <>
+                    <p style={{ fontSize: '0.8rem', marginTop: 4, marginBottom: 12 }}>
+                      Windows requires a driver to talk to USB and Bluetooth thermal printers. 
+                      If your printer is plugged in or paired but not showing up, install the driver below.
+                    </p>
+                    <Button 
+                      variant="primary" 
+                      onClick={installPrinterDriver}
+                      style={{ marginTop: 12 }}
+                    >
+                      <Download size={15} style={{ marginRight: 6 }} />
+                      Install Printer Driver
+                    </Button>
+                  </>
+                )}
               </div>
             ) : (
               thermalDevices.map((device) => {

@@ -402,3 +402,28 @@ mod tests {
     }
 }
 
+#[tauri::command]
+pub fn install_printer_driver(app: tauri::AppHandle) -> Result<(), String> {
+    use tauri::Manager;
+    let resource_path = app.path().resolve(
+        "printer-driver-installer.exe",
+        tauri::path::BaseDirectory::Resource,
+    ).map_err(|e| format!("Failed to find installer: {}", e))?;
+
+    #[cfg(windows)]
+    {
+        use std::process::Command;
+        Command::new("cmd")
+            .args(["/C", "start", "", resource_path.to_str().unwrap()])
+            .spawn()
+            .map_err(|e| format!("Failed to launch driver installer: {}. Please run it manually from the installation folder.", e))?;
+    }
+    
+    #[cfg(not(windows))]
+    {
+        return Err("Driver installation is only supported on Windows.".to_string());
+    }
+
+    Ok(())
+}
+

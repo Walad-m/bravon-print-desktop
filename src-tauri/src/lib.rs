@@ -4,6 +4,7 @@ pub mod printer;
 use commands::{
     auto_detect_printer, clear_printer_jobs, feed_label, get_printer_queue, list_printer_devices,
     open_bluetooth_settings, print_document, print_raw, probe_printer_connection, test_print,
+    install_printer_driver,
 };
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -22,6 +23,7 @@ pub fn run() {
             clear_printer_jobs,
             probe_printer_connection,
             get_printer_queue,
+            install_printer_driver,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

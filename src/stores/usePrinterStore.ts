@@ -36,6 +36,7 @@ interface PrinterState {
   clearPrinterQueue: (printerName?: string) => Promise<void>;
   printDocument: (document: LabelDocument, options?: PrintOptions) => Promise<void>;
   printRawBase64: (base64Data: string) => Promise<void>;
+  installPrinterDriver: () => Promise<void>;
   clearError: () => void;
   clearSuccessMessage: () => void;
 }
@@ -389,6 +390,21 @@ export const usePrinterStore = create<PrinterState>((set, get) => {
         set({ lastError: `Print failed: ${String(err)}` });
       } finally {
         set({ isPrinting: false });
+      }
+    },
+
+    installPrinterDriver: async () => {
+      set({ lastError: null });
+      const isTauri = typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
+      if (!isTauri) {
+        alert('Driver installation is only available in the desktop app.');
+        return;
+      }
+      try {
+        await invoke('install_printer_driver');
+        set({ lastSuccessMessage: 'Driver installer launched! Please follow the prompts to complete installation, then reconnect your printer.' });
+      } catch (err) {
+        set({ lastError: `Failed to launch installer: ${String(err)}` });
       }
     },
 
